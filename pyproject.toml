@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "zit-teat-app"
+version = "0.1.0"
+description = ""
+authors = ["Anaximandr228 <alex09.g29@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+psycopg2 = "^2.9.9"
+fastapi = {extras = ["all"], version = "^0.114.1"}
+sqlalchemy = "^2.0.34"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
