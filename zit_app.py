@@ -19,7 +19,9 @@ def get_db():
         db.close()
 
 
-@app.get("/products", response_model=list[shemas.Product])
+@app.get("/products", response_model=list[shemas.Product],
+    summary="Получение продуктов",
+    description="При запросе выводятся все продукты, содержащиеся в базе данных")
 def read_products(db: Session = Depends(get_db)):
     db_products = crud.get_products(db)
     if db_products is None:
@@ -27,12 +29,16 @@ def read_products(db: Session = Depends(get_db)):
     return db_products
 
 
-@app.post("/products", response_model=shemas.Product)
+@app.post("/products", response_model=shemas.Product,
+    summary="Добавление продуктов",
+    description="При отправке запросе в базу данных добавляется новый продукт")
 def create_product(product: shemas.ProductCreate, db: Session = Depends(get_db)):
     return crud.add_product(db=db, product=product)
 
 
-@app.get("/products/{id}", response_model=list[shemas.Product])
+@app.get("/products/{id}", response_model=list[shemas.Product],
+    summary="Получение продукта по его id",
+    description="При отправке запросе выводится запрашиваемый продукт")
 def read_product(id: int, db: Session = Depends(get_db)):
     db_product = crud.get_product(db=db, product_id=id)
     if db_product is None:
@@ -40,7 +46,9 @@ def read_product(id: int, db: Session = Depends(get_db)):
     return db_product
 
 
-@app.post("/products/type/{type_id}", response_model=list[shemas.Product])
+@app.post("/products/type/{type_id}", response_model=list[shemas.Product],
+    summary="Получение продуктов по типу",
+    description="При отправке запросе выводятся продукты по запрашиваемому типу")
 def read_products_type(type_id: int, db: Session = Depends(get_db)):
     db_products_type = crud.get_products_type(db=db, type_id=type_id)
     if db_products_type is None:
