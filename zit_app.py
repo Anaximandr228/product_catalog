@@ -46,9 +46,9 @@ def read_product(id: int, db: Session = Depends(get_db)):
     return db_product
 
 
-@app.post("/products/type/{type_id}", response_model=list[shemas.Product],
-          summary="Получение продуктов по типу",
-          description="При отправке запросе выводятся продукты по запрашиваемому типу")
+@app.get("/products/type/{type_id}", response_model=list[shemas.Product],
+         summary="Получение продуктов по типу",
+         description="При отправке запросе выводятся продукты по запрашиваемому типу")
 def read_products_type(type_id: int, db: Session = Depends(get_db)):
     db_products_type = crud.get_products_type(db=db, type_id=type_id)
     if db_products_type is None:

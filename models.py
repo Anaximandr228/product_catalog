@@ -12,7 +12,7 @@ class Product_type(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(100), nullable=False)
 
-    type = relationship("Product", back_populates="product")
+    product = relationship("Product", back_populates="type")
 
 
 # Определение полей таблицы Product
@@ -23,4 +23,4 @@ class Product(Base):
     name = Column(String(100), nullable=False)
     product_type_id = Column(Integer, ForeignKey("product_type.id"))
 
-    product = relationship("Product_type", back_populates="type")
+    type = relationship("Product_type", back_populates="product")

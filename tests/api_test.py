@@ -77,9 +77,9 @@ def test_get_product_id(client, products_setup):
     assert response.json()[0]['name'] == 'Test'
 
 
-def test_post_products_type(client, products_setup):
+def test_get_products_type(client, products_setup):
     print('test_get_products_type')
-    response = client.post("/products/type/1")
+    response = client.get("/products/type/1")
     assert response.status_code == 200
     assert response.json()[0]['name'] == 'Test'
 

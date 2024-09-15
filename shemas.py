@@ -12,7 +12,7 @@ class Product_typeCreate(Product_typeBase):
 
 class Product_type(Product_typeBase):
     id: int
-    owner_id: int
+    name: str
 
     class Config:
         from_attributes = True
@@ -24,12 +24,14 @@ class ProductBase(BaseModel):
 
 class ProductCreate(ProductBase):
     name: str
+    product_type_id: int
 
 
 class Product(ProductBase):
     id: int
     name: str
-    type: list[Product_type] = []
+    product_type_id: int
+    type: Product_type
 
     class Config:
         from_attributes = True
