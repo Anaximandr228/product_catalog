@@ -12,7 +12,7 @@ jobs:
       - name: docker-compose up
         env:
           COMPOSE_INTERACTIVE_NO_CLI: 1
-        run: docker-compose up -d
+        run: docker-compose up
       - name: Check running containers
         run: docker ps -a
       - name: Check logs
