@@ -1,13 +1,11 @@
 import json
 from typing import Generator
-
 import psycopg2
 import pytest
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from starlette.testclient import TestClient
-
 import models
 from config import user, password, host
 from zit_app import app, get_db
@@ -84,9 +82,21 @@ def test_get_products_type(client, products_setup):
     assert response.json()[0]['name'] == 'Test'
 
 
-def test_post_product(client, products_setup):
+def test_post_product(client, products_setup, db_session):
     print('test_post_products')
-    data = {"name": "Test"}
+    data = {
+            "name": "Test",
+            "product_type_id": 1
+            }
     response = client.post("/products", data=json.dumps(data))
     assert response.status_code == 200
-    # assert response.json()[0]['name'] == 'Test'
+    assert response.json()['name'] == 'Test'
+
+def test_post_product_type(client, products_setup, db_session):
+    print('test_post_products')
+    data = {
+            "name": "test_type"
+            }
+    response = client.post("/type", data=json.dumps(data))
+    assert response.status_code == 200
+    assert response.json()['name'] == 'test_type'
