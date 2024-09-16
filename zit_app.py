@@ -21,7 +21,8 @@ def get_db():
 
 @app.get("/products", response_model=list[shemas.Product],
          summary="Получение продуктов",
-         description="При запросе выводятся все продукты, содержащиеся в базе данных")
+         description="При запросе выводятся все "
+                     "продукты, содержащиеся в базе данных")
 def read_products(db: Session = Depends(get_db)):
     db_products = crud.get_products(db)
     if db_products is None:
@@ -31,15 +32,19 @@ def read_products(db: Session = Depends(get_db)):
 
 @app.post("/products", response_model=shemas.Product,
           summary="Добавление продуктов",
-          description="При отправке запросе в базу данных добавляется новый продукт")
-def create_product(product: shemas.ProductCreate, db: Session = Depends(get_db)):
+          description="При отправке запросе в "
+                      "базу данных добавляется новый продукт")
+def create_product(product: shemas.ProductCreate,
+                   db: Session = Depends(get_db)):
     return crud.add_product(db=db, product=product)
 
 
 @app.post("/type", response_model=shemas.Product_type,
           summary="Добавление типов продуктов",
-          description="При отправке запросе в базу данных добавляется новый тип продуктов")
-def create_product_type(product_type: shemas.Product_typeCreate, db: Session = Depends(get_db)):
+          description="При отправке запросе в базу "
+                      "данных добавляется новый тип продуктов")
+def create_product_type(product_type: shemas.Product_typeCreate,
+                        db: Session = Depends(get_db)):
     return crud.add_product_type(db=db, product_type=product_type)
 
 
@@ -47,7 +52,7 @@ def create_product_type(product_type: shemas.Product_typeCreate, db: Session = D
          summary="Получение продукта по его id",
          description="При отправке запросе выводится запрашиваемый продукт")
 def read_product(id: int, db: Session = Depends(get_db)):
-    db_product = crud.get_product(db=db, product_id=id)
+    db_product = crud.get_product_id(db=db, product_id=id)
     if db_product is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_product
@@ -55,7 +60,8 @@ def read_product(id: int, db: Session = Depends(get_db)):
 
 @app.get("/products/type/{type_id}", response_model=list[shemas.Product],
          summary="Получение продуктов по типу",
-         description="При отправке запросе выводятся продукты по запрашиваемому типу")
+         description="При отправке запросе выводятся "
+                     "продукты по запрашиваемому типу")
 def read_products_type(type_id: int, db: Session = Depends(get_db)):
     db_products_type = crud.get_products_type(db=db, type_id=type_id)
     if db_products_type is None:
