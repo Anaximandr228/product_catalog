@@ -3,11 +3,11 @@ from pydantic import BaseModel
 
 
 class Product_typeBase(BaseModel):
-    name: Union[str, None] = None
+    name: str
 
 
 class Product_typeCreate(Product_typeBase):
-    pass
+    name: str
 
 
 class Product_type(Product_typeBase):

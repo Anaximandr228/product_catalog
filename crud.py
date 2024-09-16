@@ -17,11 +17,19 @@ def get_product(db: Session, product_id: int) -> models.Product:
 
 # Добавление нового товара
 def add_product(db: Session, product: shemas.ProductCreate) -> models.Product:
-    db_user = models.Product(**product.dict())
-    db.add(db_user)
+    db_product = models.Product(**product.dict())
+    db.add(db_product)
     db.commit()
-    db.refresh(db_user)
-    return db_user
+    db.refresh(db_product)
+    return db_product
+
+
+def add_product_type(db: Session, product_type: shemas.Product_typeCreate) -> models.Product_type:
+    db_product_type = models.Product_type(**product_type.dict())
+    db.add(db_product_type)
+    db.commit()
+    db.refresh(db_product_type)
+    return db_product_type
 
 
 # Получение всех товаров по типу

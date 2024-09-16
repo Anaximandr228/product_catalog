@@ -36,6 +36,13 @@ def create_product(product: shemas.ProductCreate, db: Session = Depends(get_db))
     return crud.add_product(db=db, product=product)
 
 
+@app.post("/type", response_model=shemas.Product_type,
+          summary="Добавление типов продуктов",
+          description="При отправке запросе в базу данных добавляется новый тип продуктов")
+def create_product_type(product_type: shemas.Product_typeCreate, db: Session = Depends(get_db)):
+    return crud.add_product_type(db=db, product_type=product_type)
+
+
 @app.get("/products/{id}", response_model=list[shemas.Product],
          summary="Получение продукта по его id",
          description="При отправке запросе выводится запрашиваемый продукт")
