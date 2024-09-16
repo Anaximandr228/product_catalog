@@ -18,4 +18,4 @@ jobs:
       - name: Check logs
         run: docker compose logs
       - name: Test with pytest
-        run: docker exec web bash -c "pytest"
+        run: docker exec zit_test_app-web-1 bash -c "pytest"
