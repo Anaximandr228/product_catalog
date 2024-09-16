@@ -1,0 +1,21 @@
+name: Pytest
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: docker-compose up
+        env:
+          COMPOSE_INTERACTIVE_NO_CLI: 1
+        run: docker-compose up -d
+      - name: Check running containers
+        run: docker ps -a
+      - name: Check logs
+        run: docker-compose logs
+      - name: Test with pytest
+        run: docker exec docker_web bash -c "pytest"
