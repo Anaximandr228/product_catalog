@@ -23,4 +23,4 @@ class Product(Base):
     name = Column(String(100), nullable=False)
     product_type_id = Column(Integer, ForeignKey("product_type.id"))
 
-    type = relationship("Product_type", back_populates="product")
+    type = relationship("ProductType", back_populates="product")
