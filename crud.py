@@ -39,6 +39,6 @@ def add_product_type(db: Session,
 # Получение всех товаров по типу
 def get_products_type(db: Session,
                       type_id: int) -> models.Product:
-    result = \
-        db.query(models.Product).filter(models.Product.product_type_id == type_id).all()
+    result = db.query(models.Product).\
+        filter(models.Product.product_type_id == type_id).all()
     return result
