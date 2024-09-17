@@ -6,7 +6,7 @@ Base = declarative_base()
 
 
 # Определение полей таблицы Product_type
-class Product_type(Base):
+class ProductType(Base):
     __tablename__ = "product_type"
 
     id = Column(Integer, primary_key=True)

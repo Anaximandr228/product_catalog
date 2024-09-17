@@ -1,15 +1,15 @@
 from pydantic import BaseModel
 
 
-class Product_typeBase(BaseModel):
+class ProductTypeBase(BaseModel):
     name: str
 
 
-class Product_typeCreate(Product_typeBase):
+class ProductTypeCreate(ProductTypeBase):
     name: str
 
 
-class Product_type(Product_typeBase):
+class ProductType(ProductTypeBase):
     id: int
     name: str
 
@@ -30,7 +30,7 @@ class Product(ProductBase):
     id: int
     name: str
     product_type_id: int
-    type: Product_type
+    type: ProductType
 
     class Config:
         from_attributes = True
