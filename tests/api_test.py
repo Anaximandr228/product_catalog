@@ -91,8 +91,11 @@ def test_post_product(client, products_setup, db_session):
         "product_type_id": 1
     }
     response = client.post("/products", data=json.dumps(data))
+    saved_product = db_session.query(models.Product).\
+        filter(models.Product.id == response.json()['id']).all()
     assert response.status_code == 200
     assert response.json()['name'] == 'Test'
+    assert saved_product[0].name == 'Test'
 
 
 def test_post_product_type(client, products_setup, db_session):
@@ -100,7 +103,9 @@ def test_post_product_type(client, products_setup, db_session):
     data = {
         "name": "test_type"
     }
-    response = client.post("/type",
-                           data=json.dumps(data))
+    response = client.post("/type", data=json.dumps(data))
+    saved_product_type = db_session.query(models.Product_type).\
+        filter(models.Product_type.id == response.json()['id'])
     assert response.status_code == 200
     assert response.json()['name'] == 'test_type'
+    assert saved_product_type[0].name == 'test_type'
