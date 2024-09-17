@@ -6,9 +6,9 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from starlette.testclient import TestClient
-import models
-from config import user, password, host
-from zit_app import app, get_db
+from app import models
+from app.config import user, password, host
+from app.zit_app import app, get_db
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{user}:{password}@{host}/test'
 
@@ -55,7 +55,7 @@ def client(db_session) -> Generator:
 
 @pytest.fixture()
 def products_setup(db_session):
-    db_type = models.Product_type(name='test_type')
+    db_type = models.ProductType(name='test_type')
     db_session.add(db_type)
     db_session.commit()
     db_product = models.Product(name='Test', product_type_id=1)
@@ -104,8 +104,8 @@ def test_post_product_type(client, products_setup, db_session):
         "name": "test_type"
     }
     response = client.post("/type", data=json.dumps(data))
-    saved_product_type = db_session.query(models.Product_type).\
-        filter(models.Product_type.id == response.json()['id'])
+    saved_product_type = db_session.query(models.ProductType).\
+        filter(models.ProductType.id == response.json()['id'])
     assert response.status_code == 200
     assert response.json()['name'] == 'test_type'
     assert saved_product_type[0].name == 'test_type'

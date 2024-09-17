@@ -12,12 +12,13 @@ services:
       DATABASE_PORT: "5432"
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "rtf558Ur"
+      PYTHONPATH: "/ZIT_teat_app/"
     ports:
       - "8000:8000"
     depends_on:
       - postgres
     command: >
-      poetry run python zit_app.py
+      poetry run python app/zit_app.py
       
 
   postgres:

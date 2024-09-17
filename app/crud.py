@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-import models
-import shemas
+from app import models
+from app import shemas
 
 
 # Получение всех товаров
@@ -27,9 +27,9 @@ def add_product(db: Session, product: shemas.ProductCreate) -> models.Product:
 
 # Добавление нового типа продукта
 def add_product_type(db: Session,
-                     product_type: shemas.Product_typeCreate) \
-        -> models.Product_type:
-    db_product_type = models.Product_type(**product_type.dict())
+                     product_type: shemas.ProductTypeCreate) \
+        -> models.ProductType:
+    db_product_type = models.ProductType(**product_type.dict())
     db.add(db_product_type)
     db.commit()
     db.refresh(db_product_type)

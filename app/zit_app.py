@@ -1,10 +1,10 @@
 import uvicorn
 from fastapi import FastAPI, HTTPException, Depends
-import models
-import shemas
+from app import models
+from app import shemas
 from sqlalchemy.orm import Session
-import crud
-from database import engine, SessionLocal
+from app import crud
+from app.database import engine, SessionLocal
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -39,11 +39,11 @@ def create_product(product: shemas.ProductCreate,
     return crud.add_product(db=db, product=product)
 
 
-@app.post("/type", response_model=shemas.Product_type,
+@app.post("/type", response_model=shemas.ProductType,
           summary="Добавление типов продукта",
           description="При отправке запросе в базу "
                       "данных добавляется новый тип продуктов")
-def create_product_type(product_type: shemas.Product_typeCreate,
+def create_product_type(product_type: shemas.ProductTypeCreate,
                         db: Session = Depends(get_db)):
     return crud.add_product_type(db=db, product_type=product_type)
 
