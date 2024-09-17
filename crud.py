@@ -11,7 +11,8 @@ def get_products(db: Session) -> list[models.Product]:
 
 # Получение товара по id
 def get_product_id(db: Session, product_id: int) -> models.Product:
-    db_product = db.query(models.Product).filter(models.Product.id == product_id).all()
+    db_product = \
+        db.query(models.Product).filter(models.Product.id == product_id).all()
     return db_product
 
 
@@ -24,8 +25,10 @@ def add_product(db: Session, product: shemas.ProductCreate) -> models.Product:
     return db_product
 
 
+# Добавление нового типа продукта
 def add_product_type(db: Session,
-                     product_type: shemas.Product_typeCreate) -> models.Product_type:
+                     product_type: shemas.Product_typeCreate) \
+        -> models.Product_type:
     db_product_type = models.Product_type(**product_type.dict())
     db.add(db_product_type)
     db.commit()
@@ -36,5 +39,6 @@ def add_product_type(db: Session,
 # Получение всех товаров по типу
 def get_products_type(db: Session,
                       type_id: int) -> models.Product:
-    result = db.query(models.Product).filter(models.Product.product_type_id == type_id).all()
+    result = \
+        db.query(models.Product).filter(models.Product.product_type_id == type_id).all()
     return result

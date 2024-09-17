@@ -34,7 +34,9 @@ def connection():
 @pytest.fixture(scope="session")
 def db_session(connection):
     transaction = connection.begin()
-    session_factory = sessionmaker(autocommit=False, autoflush=False, bind=connection)
+    session_factory = sessionmaker(autocommit=False,
+                                   autoflush=False,
+                                   bind=connection)
     session = session_factory()
     yield session
     transaction.rollback()
@@ -85,18 +87,20 @@ def test_get_products_type(client, products_setup):
 def test_post_product(client, products_setup, db_session):
     print('test_post_products')
     data = {
-            "name": "Test",
-            "product_type_id": 1
-            }
+        "name": "Test",
+        "product_type_id": 1
+    }
     response = client.post("/products", data=json.dumps(data))
     assert response.status_code == 200
     assert response.json()['name'] == 'Test'
 
+
 def test_post_product_type(client, products_setup, db_session):
     print('test_post_products')
     data = {
-            "name": "test_type"
-            }
-    response = client.post("/type", data=json.dumps(data))
+        "name": "test_type"
+    }
+    response = client.post("/type",
+                           data=json.dumps(data))
     assert response.status_code == 200
     assert response.json()['name'] == 'test_type'

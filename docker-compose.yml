@@ -8,10 +8,10 @@ services:
     environment:
       DEBUG: False
       POSTGRES_HOST: "postgres"
-      POSTGRES_DB: "test_app"  #Введите название базы данных postgres
+      POSTGRES_DB: "test_app"
       DATABASE_PORT: "5432"
-      POSTGRES_USER: "postgres"  #Введите название пользователя базы данных
-      POSTGRES_PASSWORD: "rtf558Ur" #Введите пароль пользователя базы данных
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "rtf558Ur"
     ports:
       - "8000:8000"
     depends_on:
@@ -26,8 +26,8 @@ services:
     image: postgres:latest
 
     environment:
-      POSTGRES_DB: "test_app"  #Введите название базы данных postgres
-      POSTGRES_USER: "postgres"  #Введите название пользователя базы данных
-      POSTGRES_PASSWORD: "rtf558Ur" #Введите пароль пользователя базы данных
+      POSTGRES_DB: "test_app"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "rtf558Ur"
     ports:
       - "5432:5432"
