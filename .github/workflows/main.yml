@@ -17,5 +17,7 @@ jobs:
         run: docker ps -a
       - name: Check logs
         run: docker compose logs
+      - name: Test with linter
+        run: docker exec zit_test_app-web-1 bash -c "poetry run flake8"
       - name: Test with pytest
         run: docker exec zit_test_app-web-1 bash -c "poetry run pytest"
