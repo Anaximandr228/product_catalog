@@ -20,7 +20,7 @@ def get_db():
 
 
 @app.get("/products", response_model=list[shemas.Product],
-         summary="Получение продуктов",
+         summary="Получение продукта",
          description="При запросе выводятся все "
                      "продукты, содержащиеся в базе данных")
 def read_products(db: Session = Depends(get_db)):
@@ -31,7 +31,7 @@ def read_products(db: Session = Depends(get_db)):
 
 
 @app.post("/products", response_model=shemas.Product,
-          summary="Добавление продуктов",
+          summary="Добавление продукта",
           description="При отправке запросе в "
                       "базу данных добавляется новый продукт")
 def create_product(product: shemas.ProductCreate,
@@ -40,7 +40,7 @@ def create_product(product: shemas.ProductCreate,
 
 
 @app.post("/type", response_model=shemas.Product_type,
-          summary="Добавление типов продуктов",
+          summary="Добавление типов продукта",
           description="При отправке запросе в базу "
                       "данных добавляется новый тип продуктов")
 def create_product_type(product_type: shemas.Product_typeCreate,
