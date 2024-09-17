@@ -92,7 +92,7 @@ def test_post_product(client, products_setup, db_session):
     }
     response = client.post("/products", data=json.dumps(data))
     assert response.status_code == 200
-    assert response.json()['name'] == 'Test'
+    assert response.json()['name'] == 'test'
 
 
 def test_post_product_type(client, products_setup, db_session):
